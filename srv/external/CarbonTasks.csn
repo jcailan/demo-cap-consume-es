@@ -1,0 +1,356 @@
+{
+  "definitions": {
+    "CarbonTasks": {
+      "kind": "service"
+    },
+    "CarbonTasks.tasks": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "TASK_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 256
+        },
+        "SCHEMA_NAME": {
+          "type": "cds.String",
+          "length": 9
+        },
+        "CREATE_TIME": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "TASK_TYPE": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "TASK_TEXT": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "TASK_DESCRIPTION": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "TASK_MESSAGES": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "variants": {
+          "type": "cds.Association",
+          "target": "CarbonTasks.variants"
+        },
+        "properties": {
+          "type": "cds.Association",
+          "target": "CarbonTasks.properties"
+        },
+        "parameters": {
+          "type": "cds.Association",
+          "target": "CarbonTasks.parameters"
+        },
+        "executions": {
+          "type": "cds.Association",
+          "target": "CarbonTasks.executions"
+        },
+        "messages": {
+          "type": "cds.Association",
+          "target": "CarbonTasks.messages"
+        },
+        "status": {
+          "type": "cds.Association",
+          "target": "CarbonTasks.status"
+        }
+      }
+    },
+    "CarbonTasks.variants": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "TASK_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 256
+        },
+        "VARIANT_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 256
+        },
+        "VARIANT_DESCRIPTION": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "SHARED": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "USER_NAME": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "values": {
+          "type": "cds.Association",
+          "target": "CarbonTasks.values"
+        }
+      }
+    },
+    "CarbonTasks.values": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "TASK_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 256
+        },
+        "VARIANT_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 256
+        },
+        "PARAMETER_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 256
+        },
+        "EXPRESSION": {
+          "type": "cds.String",
+          "length": 256
+        }
+      }
+    },
+    "CarbonTasks.properties": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "TASK_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 256
+        },
+        "TASK_TEXT": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "TASK_DESCRIPTION": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "TASK_MESSAGES": {
+          "type": "cds.String",
+          "length": 256
+        }
+      }
+    },
+    "CarbonTasks.parameters": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "TASK_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 256
+        },
+        "PARAMETER_NAME": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "DATA_TYPE_NAME": {
+          "type": "cds.String",
+          "length": 16
+        },
+        "PARAMETER_TYPE": {
+          "type": "cds.String",
+          "length": 7
+        },
+        "LENGTH": {
+          "type": "cds.Integer"
+        },
+        "POSITION": {
+          "type": "cds.Integer"
+        },
+        "LABEL": {
+          "type": "cds.String",
+          "length": 50
+        },
+        "DESCRIPTION": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "GUI_TYPE": {
+          "type": "cds.String",
+          "length": 20
+        },
+        "EXPRESSION": {
+          "type": "cds.String",
+          "length": 256
+        }
+      }
+    },
+    "CarbonTasks.executions": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "TASK_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 256
+        },
+        "TASK_EXECUTION_ID": {
+          "key": true,
+          "type": "cds.Integer64"
+        },
+        "HOST": {
+          "type": "cds.String",
+          "length": 64
+        },
+        "PORT": {
+          "type": "cds.Integer"
+        },
+        "SCHEMA_NAME": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "CONNECTION_ID": {
+          "type": "cds.Integer"
+        },
+        "TRANSACTION_ID": {
+          "type": "cds.Integer"
+        },
+        "PARENT_TASK_EXECUTION_ID": {
+          "type": "cds.Integer64"
+        },
+        "IS_ASYNC": {
+          "type": "cds.String",
+          "length": 5
+        },
+        "PARAMETERS": {
+          "type": "cds.String",
+          "length": 5000
+        },
+        "PROCEDURE_PARAMETERS": {
+          "type": "cds.String",
+          "length": 5000
+        },
+        "START_TIME": {
+          "type": "cds.Timestamp"
+        },
+        "END_TIME": {
+          "type": "cds.Timestamp"
+        },
+        "DURATION": {
+          "type": "cds.Integer64"
+        },
+        "STATUS": {
+          "type": "cds.String",
+          "length": 16
+        },
+        "CURRENT_OPERATION": {
+          "type": "cds.String",
+          "length": 128
+        },
+        "PROCESSED_RECORDS": {
+          "type": "cds.Integer64"
+        },
+        "PARTITION_COUNT": {
+          "type": "cds.Integer"
+        },
+        "TOTAL_PROGRESS_PERCENT": {
+          "type": "cds.Double"
+        },
+        "USER_NAME": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "APPLICATION_USER_NAME": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "HAS_SIDE_EFFECTS": {
+          "type": "cds.String",
+          "length": 5
+        }
+      }
+    },
+    "CarbonTasks.messages": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "TASK_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 256
+        },
+        "OID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "TYPE": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "CLASS": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "ID": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "TEXT": {
+          "type": "cds.String",
+          "length": 5000
+        },
+        "V1": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "V2": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "V3": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "V4": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "V5": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "CHANGE_USER": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "CHANGE_NAME": {
+          "type": "cds.String",
+          "length": 256
+        },
+        "CHANGE_TIME": {
+          "type": "cds.Timestamp"
+        }
+      }
+    },
+    "CarbonTasks.status": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "TASK_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 5000
+        },
+        "STATUS": {
+          "type": "cds.String",
+          "length": 128
+        },
+        "START_TIME": {
+          "type": "cds.Timestamp"
+        }
+      }
+    }
+  }
+}

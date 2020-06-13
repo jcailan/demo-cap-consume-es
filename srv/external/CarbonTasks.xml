@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<edmx:Edmx Version="1.0" 
+	xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" 
+	xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+		<Schema Namespace="carbon_v1.api.v1.tasks" 
+			xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" 
+			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" 
+			xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="tasksType">
+				<Key>
+					<PropertyRef Name="TASK_NAME" />
+				</Key>
+				<Property Name="TASK_NAME" Type="Edm.String" Nullable="false" MaxLength="256" />
+				<Property Name="SCHEMA_NAME" Type="Edm.String" Nullable="false" MaxLength="9" />
+				<Property Name="CREATE_TIME" Type="Edm.String" Nullable="false" MaxLength="1" />
+				<Property Name="TASK_TYPE" Type="Edm.String" Nullable="false" MaxLength="4" />
+				<Property Name="TASK_TEXT" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+				<Property Name="TASK_DESCRIPTION" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+				<Property Name="TASK_MESSAGES" Type="Edm.String" MaxLength="256" />
+				<NavigationProperty Name="variants" Relationship="carbon_v1.api.v1.tasks.taskVariantsType" FromRole="tasksPrincipal" ToRole="variantsDependent" />
+				<NavigationProperty Name="properties" Relationship="carbon_v1.api.v1.tasks.taskPropertiesType" FromRole="tasksPrincipal" ToRole="propertiesDependent" />
+				<NavigationProperty Name="parameters" Relationship="carbon_v1.api.v1.tasks.taskParametersType" FromRole="tasksPrincipal" ToRole="parametersDependent" />
+				<NavigationProperty Name="executions" Relationship="carbon_v1.api.v1.tasks.taskExecutionsType" FromRole="tasksPrincipal" ToRole="executionsDependent" />
+				<NavigationProperty Name="messages" Relationship="carbon_v1.api.v1.tasks.taskMessagesType" FromRole="tasksPrincipal" ToRole="messagesDependent" />
+				<NavigationProperty Name="status" Relationship="carbon_v1.api.v1.tasks.taskStatusType" FromRole="tasksPrincipal" ToRole="statusDependent" />
+			</EntityType>
+			<EntityType Name="variantsType">
+				<Key>
+					<PropertyRef Name="TASK_NAME" />
+					<PropertyRef Name="VARIANT_NAME" />
+				</Key>
+				<Property Name="TASK_NAME" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+				<Property Name="VARIANT_NAME" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+				<Property Name="VARIANT_DESCRIPTION" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+				<Property Name="SHARED" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="1" />
+				<Property Name="USER_NAME" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+				<NavigationProperty Name="values" Relationship="carbon_v1.api.v1.tasks.variantValuesType" FromRole="variantsPrincipal" ToRole="valuesDependent" />
+			</EntityType>
+			<EntityType Name="valuesType">
+				<Key>
+					<PropertyRef Name="TASK_NAME" />
+					<PropertyRef Name="VARIANT_NAME" />
+					<PropertyRef Name="PARAMETER_NAME" />
+				</Key>
+				<Property Name="TASK_NAME" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+				<Property Name="VARIANT_NAME" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+				<Property Name="PARAMETER_NAME" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+				<Property Name="EXPRESSION" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+			</EntityType>
+			<EntityType Name="propertiesType">
+				<Key>
+					<PropertyRef Name="TASK_NAME" />
+				</Key>
+				<Property Name="TASK_NAME" Type="Edm.String" Nullable="false" MaxLength="256" />
+				<Property Name="TASK_TEXT" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+				<Property Name="TASK_DESCRIPTION" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+				<Property Name="TASK_MESSAGES" Type="Edm.String" MaxLength="256" />
+			</EntityType>
+			<EntityType Name="parametersType">
+				<Key>
+					<PropertyRef Name="TASK_NAME" />
+				</Key>
+				<Property Name="TASK_NAME" Type="Edm.String" Nullable="false" MaxLength="256" />
+				<Property Name="PARAMETER_NAME" Type="Edm.String" MaxLength="256" />
+				<Property Name="DATA_TYPE_NAME" Type="Edm.String" MaxLength="16" />
+				<Property Name="PARAMETER_TYPE" Type="Edm.String" MaxLength="7" />
+				<Property Name="LENGTH" Type="Edm.Int32" Nullable="false" />
+				<Property Name="POSITION" Type="Edm.Int32" Nullable="false" />
+				<Property Name="LABEL" Type="Edm.String" DefaultValue="" MaxLength="50" />
+				<Property Name="DESCRIPTION" Type="Edm.String" DefaultValue="" MaxLength="256" />
+				<Property Name="GUI_TYPE" Type="Edm.String" DefaultValue="" MaxLength="20" />
+				<Property Name="EXPRESSION" Type="Edm.String" DefaultValue="" MaxLength="256" />
+			</EntityType>
+			<EntityType Name="executionsType">
+				<Key>
+					<PropertyRef Name="TASK_NAME" />
+					<PropertyRef Name="TASK_EXECUTION_ID" />
+				</Key>
+				<Property Name="HOST" Type="Edm.String" MaxLength="64" />
+				<Property Name="PORT" Type="Edm.Int32" />
+				<Property Name="SCHEMA_NAME" Type="Edm.String" Nullable="false" MaxLength="256" />
+				<Property Name="TASK_NAME" Type="Edm.String" Nullable="false" MaxLength="256" />
+				<Property Name="CONNECTION_ID" Type="Edm.Int32" />
+				<Property Name="TRANSACTION_ID" Type="Edm.Int32" />
+				<Property Name="TASK_EXECUTION_ID" Type="Edm.Int64" Nullable="false" />
+				<Property Name="PARENT_TASK_EXECUTION_ID" Type="Edm.Int64" />
+				<Property Name="IS_ASYNC" Type="Edm.String" MaxLength="5" />
+				<Property Name="PARAMETERS" Type="Edm.String" MaxLength="5000" />
+				<Property Name="PROCEDURE_PARAMETERS" Type="Edm.String" MaxLength="5000" />
+				<Property Name="START_TIME" Type="Edm.DateTime" />
+				<Property Name="END_TIME" Type="Edm.DateTime" />
+				<Property Name="DURATION" Type="Edm.Int64" />
+				<Property Name="STATUS" Type="Edm.String" MaxLength="16" />
+				<Property Name="CURRENT_OPERATION" Type="Edm.String" MaxLength="128" />
+				<Property Name="PROCESSED_RECORDS" Type="Edm.Int64" />
+				<Property Name="PARTITION_COUNT" Type="Edm.Int32" />
+				<Property Name="TOTAL_PROGRESS_PERCENT" Type="Edm.Double" />
+				<Property Name="USER_NAME" Type="Edm.String" MaxLength="256" />
+				<Property Name="APPLICATION_USER_NAME" Type="Edm.String" MaxLength="256" />
+				<Property Name="HAS_SIDE_EFFECTS" Type="Edm.String" MaxLength="5" />
+			</EntityType>
+			<EntityType Name="messagesType">
+				<Key>
+					<PropertyRef Name="TASK_NAME" />
+					<PropertyRef Name="OID" />
+				</Key>
+				<Property Name="TYPE" Type="Edm.String" DefaultValue="" MaxLength="256" />
+				<Property Name="CLASS" Type="Edm.String" DefaultValue="" MaxLength="256" />
+				<Property Name="ID" Type="Edm.String" DefaultValue="" MaxLength="256" />
+				<Property Name="TEXT" Type="Edm.String" DefaultValue="" MaxLength="5000" />
+				<Property Name="V1" Type="Edm.String" DefaultValue="" MaxLength="256" />
+				<Property Name="V2" Type="Edm.String" DefaultValue="" MaxLength="256" />
+				<Property Name="V3" Type="Edm.String" DefaultValue="" MaxLength="256" />
+				<Property Name="V4" Type="Edm.String" DefaultValue="" MaxLength="256" />
+				<Property Name="V5" Type="Edm.String" DefaultValue="" MaxLength="256" />
+				<Property Name="CHANGE_USER" Type="Edm.String" DefaultValue="" MaxLength="256" />
+				<Property Name="CHANGE_NAME" Type="Edm.String" DefaultValue="" MaxLength="256" />
+				<Property Name="CHANGE_TIME" Type="Edm.DateTime" DefaultValue="0000-00-00T00:00:00.0000000" />
+				<Property Name="TASK_NAME" Type="Edm.String" Nullable="false" DefaultValue="" MaxLength="256" />
+				<Property Name="OID" Type="Edm.Int32" Nullable="false" />
+			</EntityType>
+			<EntityType Name="statusType">
+				<Key>
+					<PropertyRef Name="TASK_NAME" />
+				</Key>
+				<Property Name="TASK_NAME" Type="Edm.String" Nullable="false" MaxLength="5000" />
+				<Property Name="STATUS" Type="Edm.String" MaxLength="128" />
+				<Property Name="START_TIME" Type="Edm.DateTime" />
+			</EntityType>
+			<Association Name="taskVariantsType">
+				<End Type="carbon_v1.api.v1.tasks.tasksType" Role="tasksPrincipal" Multiplicity="1"/>
+				<End Type="carbon_v1.api.v1.tasks.variantsType" Role="variantsDependent" Multiplicity="*"/>
+				<ReferentialConstraint>
+					<Principal Role="tasksPrincipal">
+						<PropertyRef Name="TASK_NAME"/>
+					</Principal>
+					<Dependent Role="variantsDependent">
+						<PropertyRef Name="TASK_NAME"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="variantValuesType">
+				<End Type="carbon_v1.api.v1.tasks.variantsType" Role="variantsPrincipal" Multiplicity="1"/>
+				<End Type="carbon_v1.api.v1.tasks.valuesType" Role="valuesDependent" Multiplicity="*"/>
+				<ReferentialConstraint>
+					<Principal Role="variantsPrincipal">
+						<PropertyRef Name="TASK_NAME"/>
+						<PropertyRef Name="VARIANT_NAME"/>
+					</Principal>
+					<Dependent Role="valuesDependent">
+						<PropertyRef Name="TASK_NAME"/>
+						<PropertyRef Name="VARIANT_NAME"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="taskPropertiesType">
+				<End Type="carbon_v1.api.v1.tasks.tasksType" Role="tasksPrincipal" Multiplicity="1"/>
+				<End Type="carbon_v1.api.v1.tasks.propertiesType" Role="propertiesDependent" Multiplicity="*"/>
+				<ReferentialConstraint>
+					<Principal Role="tasksPrincipal">
+						<PropertyRef Name="TASK_NAME"/>
+					</Principal>
+					<Dependent Role="propertiesDependent">
+						<PropertyRef Name="TASK_NAME"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="taskParametersType">
+				<End Type="carbon_v1.api.v1.tasks.tasksType" Role="tasksPrincipal" Multiplicity="1"/>
+				<End Type="carbon_v1.api.v1.tasks.parametersType" Role="parametersDependent" Multiplicity="*"/>
+				<ReferentialConstraint>
+					<Principal Role="tasksPrincipal">
+						<PropertyRef Name="TASK_NAME"/>
+					</Principal>
+					<Dependent Role="parametersDependent">
+						<PropertyRef Name="TASK_NAME"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="taskExecutionsType">
+				<End Type="carbon_v1.api.v1.tasks.tasksType" Role="tasksPrincipal" Multiplicity="1"/>
+				<End Type="carbon_v1.api.v1.tasks.executionsType" Role="executionsDependent" Multiplicity="*"/>
+				<ReferentialConstraint>
+					<Principal Role="tasksPrincipal">
+						<PropertyRef Name="TASK_NAME"/>
+					</Principal>
+					<Dependent Role="executionsDependent">
+						<PropertyRef Name="TASK_NAME"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="taskMessagesType">
+				<End Type="carbon_v1.api.v1.tasks.tasksType" Role="tasksPrincipal" Multiplicity="1"/>
+				<End Type="carbon_v1.api.v1.tasks.messagesType" Role="messagesDependent" Multiplicity="*"/>
+				<ReferentialConstraint>
+					<Principal Role="tasksPrincipal">
+						<PropertyRef Name="TASK_NAME"/>
+					</Principal>
+					<Dependent Role="messagesDependent">
+						<PropertyRef Name="TASK_NAME"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="taskStatusType">
+				<End Type="carbon_v1.api.v1.tasks.tasksType" Role="tasksPrincipal" Multiplicity="1"/>
+				<End Type="carbon_v1.api.v1.tasks.statusType" Role="statusDependent" Multiplicity="*"/>
+				<ReferentialConstraint>
+					<Principal Role="tasksPrincipal">
+						<PropertyRef Name="TASK_NAME"/>
+					</Principal>
+					<Dependent Role="statusDependent">
+						<PropertyRef Name="TASK_NAME"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="tasks" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="tasks" EntityType="carbon_v1.api.v1.tasks.tasksType" />
+				<EntitySet Name="variants" EntityType="carbon_v1.api.v1.tasks.variantsType" />
+				<EntitySet Name="values" EntityType="carbon_v1.api.v1.tasks.valuesType" />
+				<EntitySet Name="properties" EntityType="carbon_v1.api.v1.tasks.propertiesType" />
+				<EntitySet Name="parameters" EntityType="carbon_v1.api.v1.tasks.parametersType" />
+				<EntitySet Name="executions" EntityType="carbon_v1.api.v1.tasks.executionsType" />
+				<EntitySet Name="messages" EntityType="carbon_v1.api.v1.tasks.messagesType" />
+				<EntitySet Name="status" EntityType="carbon_v1.api.v1.tasks.statusType" />
+				<AssociationSet Name="taskVariants" Association="carbon_v1.api.v1.tasks.taskVariantsType">
+					<End Role="tasksPrincipal" EntitySet="tasks"/>
+					<End Role="variantsDependent" EntitySet="variants"/>
+				</AssociationSet>
+				<AssociationSet Name="variantValues" Association="carbon_v1.api.v1.tasks.variantValuesType">
+					<End Role="variantsPrincipal" EntitySet="variants"/>
+					<End Role="valuesDependent" EntitySet="values"/>
+				</AssociationSet>
+				<AssociationSet Name="taskProperties" Association="carbon_v1.api.v1.tasks.taskPropertiesType">
+					<End Role="tasksPrincipal" EntitySet="tasks"/>
+					<End Role="propertiesDependent" EntitySet="properties"/>
+				</AssociationSet>
+				<AssociationSet Name="taskParameters" Association="carbon_v1.api.v1.tasks.taskParametersType">
+					<End Role="tasksPrincipal" EntitySet="tasks"/>
+					<End Role="parametersDependent" EntitySet="parameters"/>
+				</AssociationSet>
+				<AssociationSet Name="taskExecutions" Association="carbon_v1.api.v1.tasks.taskExecutionsType">
+					<End Role="tasksPrincipal" EntitySet="tasks"/>
+					<End Role="executionsDependent" EntitySet="executions"/>
+				</AssociationSet>
+				<AssociationSet Name="taskMessages" Association="carbon_v1.api.v1.tasks.taskMessagesType">
+					<End Role="tasksPrincipal" EntitySet="tasks"/>
+					<End Role="messagesDependent" EntitySet="messages"/>
+				</AssociationSet>
+				<AssociationSet Name="taskStatus" Association="carbon_v1.api.v1.tasks.taskStatusType">
+					<End Role="tasksPrincipal" EntitySet="tasks"/>
+					<End Role="statusDependent" EntitySet="status"/>
+				</AssociationSet>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

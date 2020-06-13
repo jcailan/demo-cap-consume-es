@@ -1,0 +1,8 @@
+TASK_NAME;SCHEMA_NAME;CREATE_TIME;TASK_TYPE;TASK_TEXT;TASK_DESCRIPTION;TASK_MESSAGES
+carbon_v1.tasks.P6WBS.in.SAPWBS::mocked;CARBON_V1;;PROC;(PS) SAPWBS -> P6WBS;Update P6 WBS from SAP WBS;
+carbon_v1.tasks.P6Project.in.SAPProject::composed;CARBON_V1;;PROC;(PS) SAPProject -> P6Project;Update P6 projects from SAP project definitions;
+carbon_v1.tasks.P6Resource.in.SAPWorkcenter::composed;CARBON_V1;;PROC;(MD) SAPWorkcenter -> P6Resource;Update P6 resource master data from SAP work centers;
+carbon_v1.tasks.P6Activity.in.SAPActivity::composed;CARBON_V1;;PROC;(PS) SAPActivity -> P6Activity;Update P6 activities from SAP PS activities;
+carbon_v1.tasks.P6Activity.in.SAPOperation::composed;CARBON_V1;;PROC;(PM) SAPOperation -> P6Activity;Update P6 activities from SAP service order operations;
+carbon_v1.tasks.P6Activity.out.SAPConfirmation::composed;CARBON_V1;;PROC;(PM) P6Activity -> SAPConfirmation;Create SAP service order confirmations from P6 activities;
+carbon_v1.tasks.P6Activity.out.SAPOperation::composed;CARBON_V1;;PROC;(PM) P6Activity -> SAPOperation;Update SAP service order operations from P6 activities;
